@@ -24,6 +24,12 @@ app.get "/", (req, res) ->
 app.get "/documentation", (req, res) ->
   res.render("documentation", page: "/documentation")
 
+app.get "/:id/*", req, res) ->
+  res.local "raw_path", "/raw" + req.url
+  res.local "plunk", req.plunk
+  
+app.get "/:id", (req, res) -> res.redirect("/#{req.params.id}/", 301)
+
 app.get "/preview/:id", (req, res) ->
   res.render("preview", id: req.params.id)
 
