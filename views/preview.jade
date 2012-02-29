@@ -4,15 +4,17 @@ html
     meta(charset="utf-8")
     meta(name="viewport",content="width=device-width, initial-scale=1.0")
     title Plunker
-    link(rel="stylesheet",href="/style/preview.css")
     // if lt IE 9
       script(src="http://html5shim.googlecode.com/svn/trunk/html5.js")
-    script(type="text/javascript",src="/lib/jquery.min.js")
+    script(type="text/javascript",src="/js/jquery.min.js")
 
+    != css("preview")
     != js("preview")
 
   body
     div#container
+      div#link
+        a(href="/edit/#{plunk_id}") Edit in Plunker
       iframe#plunk(frameborder="0",height="100%",width="100%",src=raw_url)
 
     script

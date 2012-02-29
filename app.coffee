@@ -5,9 +5,9 @@ assets = require("connect-assets")
 
 app = module.exports = express.createServer()
 
-app.use assets()
 app.use gzippo.staticGzip("#{__dirname}/public")
 app.use gzippo.compress()
+app.use assets()
 app.use express.static("#{__dirname}/public")
 
 app.use "/api", require("./servers/api")
@@ -28,14 +28,16 @@ app.get "/", (req, res) ->
 app.get "/documentation", (req, res) ->
   res.render("documentation", page: "/documentation")
 
-#app.get "/:id/*", (req, res) ->
-#  res.local "raw_url", "/raw" + req.url
-#  res.local "plunk_id", req.params.id
-#  res.render "preview"
+app.get /^\/([A-Za-z0-9]{6})\/(.*)$/, (req, res) ->
+  res.local "raw_url", "/raw" + req.url
+  res.local "plunk_id", req.params[0]
+  res.render "preview"
   
-#app.get "/:id", (req, res) -> res.redirect("/#{req.params.id}/", 301)
+app.get /^\/([A-Za-z0-9]{6})$/, (req, res) -> res.redirect("/#{req.params[0]}/", 301)
 
 
+app.get "/about", (req, res) ->
+  res.render("about", page: "/about")
 
 
 

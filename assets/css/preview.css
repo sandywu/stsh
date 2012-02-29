@@ -1,0 +1,44 @@
+body {
+  margin: 0; padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+#link {
+  position: fixed;
+  display: inline-block;
+  top: -1px;
+  right: 20px;
+  z-index: 1000;
+  background-color: white;
+  border: 1px solid #ccc;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+  -moz-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+  box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+  -webkit-border-bottom-right-radius: 3px;
+  -webkit-border-bottom-left-radius: 3px;
+  -moz-border-radius-bottomright: 3px;
+  -moz-border-radius-bottomleft: 3px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+#link a {
+  padding: 0 4px;
+  text-decoration: none;
+}
+#link a:hover {
+  text-decoration: underline;
+}
+
+#container, #plunk {
+  margin: 0; padding: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  overflow: hidden;
+}
+
+#plunk {
+  overflow: auto;
+}
