@@ -8,7 +8,7 @@
         <div class="thumbnail">
           <h5 class="description" title="{{description}}">{{description}}</h5>
           <a href="{{html_url}}">
-            <img src="http://placehold.it/205x154&text=Loading..." data-original="http://immediatenet.com/t/l3?Size=1024x768&URL={{html_url}}" class="lazy" />
+            <img src="http://placehold.it/205x154&text=Loading..." data-original="http://immediatenet.com/t/l3?Size=1024x768&URL={{raw_url}}" class="lazy" />
           </a>
           <div class="caption">
             <p>

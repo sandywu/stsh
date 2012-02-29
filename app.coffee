@@ -5,18 +5,22 @@ assets = require("connect-assets")
 
 app = module.exports = express.createServer()
 
+app.use assets()
+app.use gzippo.staticGzip("#{__dirname}/public")
+app.use gzippo.compress()
+app.use express.static("#{__dirname}/public")
+
+app.use "/api", require("./servers/api")
+app.use "/raw", require("./servers/plunks")
+
+
 app.configure ->
   app.set "views", "#{__dirname}/views"
   app.set "view engine", "jade"
   app.set "view options", layout: false
 
   app.use express.logger()
-  app.use assets()
-  app.use gzippo.staticGzip("#{__dirname}/public")
-  app.use gzippo.compress()
-  app.use express.static("#{__dirname}/public")
   app.use express.errorHandler({ dumpExceptions: true, showStack: true })
-
 
 app.get "/", (req, res) ->
   res.render("index", page: "/")
@@ -24,17 +28,15 @@ app.get "/", (req, res) ->
 app.get "/documentation", (req, res) ->
   res.render("documentation", page: "/documentation")
 
-app.get "/:id/*", req, res) ->
-  res.local "raw_path", "/raw" + req.url
-  res.local "plunk", req.plunk
+#app.get "/:id/*", (req, res) ->
+#  res.local "raw_url", "/raw" + req.url
+#  res.local "plunk_id", req.params.id
+#  res.render "preview"
   
-app.get "/:id", (req, res) -> res.redirect("/#{req.params.id}/", 301)
+#app.get "/:id", (req, res) -> res.redirect("/#{req.params.id}/", 301)
 
-app.get "/preview/:id", (req, res) ->
-  res.render("preview", id: req.params.id)
 
-app.use "/api", require("./servers/api")
-app.use "/", require("./servers/plunks")
+
 
 
 if require.main == module
